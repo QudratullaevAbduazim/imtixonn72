@@ -1,0 +1,159 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ phone.name }}{% endblock %}
+
+{% block content %}
+<div class="phone-card">
+
+    <!-- Telefon rasm -->
+    {% if phone.image %}
+        <div class="phone-image">
+            <img src="{{ phone.image.url }}" alt="{{ phone.name }}">
+        </div>
+    {% endif %}
+
+    <!-- Telefon ma'lumotlari -->
+    <h2 class="phone-name">{{ phone.name }}</h2>
+
+    <div class="phone-info">
+        <p class="info-item">Price: ${{ phone.price }}</p>
+        <p class="info-item">Year: {{ phone.year }}</p>
+        <p class="info-item">Category: <strong>{{ phone.category.name }}</strong></p>
+        <p class="info-item">Amount: <strong>{{ phone.amount }}</strong></p>
+        {% if phone.desc %}
+            <p class="info-item desc">{{ phone.desc }}</p>
+        {% endif %}
+    </div>
+
+    <!-- Tugmalar -->
+    <div class="phone-buttons">
+        <a href="{% url 'phone_update' phone.pk %}" class="btn update-btn">Update</a>
+        <a href="{% url 'phone_delete' phone.pk %}" class="btn delete-btn">Delete</a>
+        <a href="{% url 'home' %}" class="btn back-btn">Back to Home</a>
+    </div>
+
+</div>
+
+<!-- CSS Animatsiyalar -->
+<style>
+    .phone-card {
+        max-width: 600px;
+        margin: 50px auto;
+        background: white;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+        text-align: center;
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .phone-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+    }
+
+    .phone-image img {
+        width: 100%;
+        height: auto;
+        max-height: 400px;
+        object-fit: contain;
+        border-radius: 10px 10px 0 0;
+        transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .phone-image img:hover {
+        transform: scale(1.05);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+
+    .phone-name {
+        margin-bottom: 20px;
+        color: #4b6cb7;
+        transition: transform 0.3s, color 0.3s;
+    }
+
+    .phone-name:hover {
+        transform: scale(1.05);
+        color: #3a559d;
+    }
+
+    .phone-info {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin-bottom: 25px;
+    }
+
+    .info-item {
+        padding: 12px;
+        border-radius: 8px;
+        background: #f4f7f8;
+        transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+        cursor: default;
+    }
+
+    .info-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        background: #e2e8f0;
+    }
+
+    .desc {
+        color: #555;
+    }
+
+    .phone-buttons {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .btn {
+        padding: 12px;
+        border-radius: 8px;
+        font-weight: bold;
+        color: white;
+        text-decoration: none;
+        transition: transform 0.3s, background 0.3s, box-shadow 0.3s;
+    }
+
+    .btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+    }
+
+    .update-btn {
+        background: #4b6cb7;
+    }
+
+    .update-btn:hover {
+        background: #3a559d;
+    }
+
+    .delete-btn {
+        background: #ff4d4f;
+    }
+
+    .delete-btn:hover {
+        background: #d9363e;
+    }
+
+    .back-btn {
+        background: #6c757d;
+    }
+
+    .back-btn:hover {
+        background: #5a6268;
+    }
+
+    @media (max-width: 768px) {
+        .phone-card {
+            margin: 30px 15px;
+            padding: 20px;
+        }
+        .phone-image img {
+            max-height: 300px;
+        }
+    }
+</style>
+{% endblock %}

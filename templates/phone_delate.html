@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}Delete Phone{% endblock %}
+
+{% block content %}
+<div style="max-width: 500px; margin: 50px auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 8px 20px rgba(0,0,0,0.1); text-align: center;">
+    <h2 style="color: #ff4d4f; margin-bottom: 25px;">Are you sure you want to delete <br><strong>{{ phone.name }}</strong>?</h2>
+
+    <form method="POST" style="margin-bottom: 20px;">
+        {% csrf_token %}
+        <button type="submit" class="btn delete-btn" style="width: 100%; padding: 12px; background: #ff4d4f; color: white; border-radius: 8px; font-weight: bold; cursor: pointer; transition: background 0.3s;">Yes, Delete</button>
+    </form>
+
+    <a href="{% url 'phone_detail' phone.pk %}" class="button cancel-btn" style="display: inline-block; width: 100%; padding: 12px; background: #4b6cb7; color: white; border-radius: 8px; font-weight: bold; transition: background 0.3s;">Cancel</a>
+</div>
+
+<!-- Animatsiya CSS -->
+<style>
+    .delete-btn:hover {
+        background: #d9363e;
+    }
+
+    .cancel-btn:hover {
+        background: #3a559d;
+    }
+
+    h2 {
+        transition: color 0.3s;
+    }
+
+    h2:hover {
+        color: #ff7875;
+    }
+</style>
+{% endblock %}

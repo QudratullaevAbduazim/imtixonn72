@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+<!-- Messages -->
+{% if messages %}
+    <div style="max-width: 800px; margin: 20px auto; text-align: center;">
+        {% for message in messages %}
+            <div style="
+                padding: 12px 20px;
+                margin-bottom: 10px;
+                border-radius: 8px;
+                color: white;
+                {% if message.tags == 'success' %}
+                    background-color: #28a745;
+                {% elif message.tags == 'error' %}
+                    background-color: #dc3545;
+                {% elif message.tags == 'warning' %}
+                    background-color: #ffc107;
+                    color: black;
+                {% else %}
+                    background-color: #17a2b8;
+                {% endif %}
+            ">
+                {{ message }}
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
+
+<h2 style="margin-bottom: 25px; text-align: center; color: #4b6cb7;">Categories</h2>
+
+<div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; margin-bottom: 40px;">
+    {% for category in categories %}
+        <div class="card" style="flex: 1 1 180px; max-width: 180px; text-align: center; transition: transform 0.3s, box-shadow 0.3s; cursor: pointer;">
+            <a href="{% url 'category_detail' pk=category.pk %}" style="display: block; padding: 20px; color: #333;">
+                <h3 style="margin-bottom: 10px; color: #4b6cb7;">{{ category.name }}</h3>
+            </a>
+        </div>
+    {% empty %}
+        <p style="text-align: center; color: #777;">No categories available.</p>
+    {% endfor %}
+</div>
+
+<h2 style="margin-bottom: 20px; text-align: center; color: #4b6cb7;">Phones</h2>
+
+<form method="GET" style="text-align: center; margin-bottom: 30px;">
+    <input type="text" name="q" placeholder="Search..." value="{{ request.GET.q }}"
+        style="padding: 10px 15px; border-radius: 8px; border: 1px solid #ccc; width: 250px;">
+    <button type="submit" style="padding: 10px 20px; border-radius: 8px; border: none; background: #4b6cb7; color: white; font-weight: bold; cursor: pointer; transition: background 0.3s;">Search</button>
+</form>
+
+<div style="display: flex; flex-wrap: wrap; gap: 25px; justify-content: center;">
+    {% for phone in phones %}
+        <div class="card" style="flex: 1 1 220px; max-width: 220px; text-align: center; transition: transform 0.3s, box-shadow 0.3s; cursor: pointer;">
+            {% if phone.image %}
+                <img src="{{ phone.image.url }}" alt="{{ phone.name }}" style="width: 100%; height: 180px; object-fit: cover; border-radius: 10px 10px 0 0;">
+            {% else %}
+                <div style="width: 100%; height: 180px; background: #e0e0e0; display: flex; align-items: center; justify-content: center; border-radius: 10px 10px 0 0; color: #999;">No Image</div>
+            {% endif %}
+            <div style="padding: 15px;">
+                <h3 style="margin-bottom: 10px; font-size: 18px; color: #333;">{{ phone.name }}</h3>
+                <p style="margin-bottom: 15px; font-weight: bold; color: #4b6cb7;">${{ phone.price }}</p>
+                <a href="{% url 'phone_detail' phone.pk %}" class="btn" style="display: inline-block; padding: 10px 20px; background: #4b6cb7; color: white; border-radius: 8px; transition: background 0.3s;">View Details</a>
+            </div>
+        </div>
+    {% empty %}
+        <p style="text-align: center; font-size: 16px; color: #777;">No phones found.</p>
+    {% endfor %}
+</div>
+
+<div style="margin-top: 40px; text-align: center;">
+    <a href="{% url 'phone_create' %}" class="button" style="padding: 12px 25px; background: #ff6b6b; color: white; border-radius: 8px; font-weight: bold; transition: background 0.3s;">Create Phone</a>
+</div>
+
+<!-- Animatsiya CSS -->
+<style>
+    .card:hover {
+        transform: translateY(-10px) scale(1.05);
+        box-shadow: 0 15px 25px rgba(0,0,0,0.2);
+    }
+
+    .btn:hover {
+        background: #3a559d;
+    }
+
+    .button:hover {
+        background: #ff4757;
+    }
+
+    @media (max-width: 768px) {
+        .card {
+            flex: 1 1 100%;
+        }
+    }
+</style>
+
+{% endblock %}

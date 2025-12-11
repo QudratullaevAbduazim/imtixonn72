@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block title %}Create Phone{% endblock %}
+
+{% block content %}
+<h2 style="text-align: center; color: #4b6cb7; margin-bottom: 30px;">Create Phone</h2>
+
+<div style="max-width: 500px; margin: 0 auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 8px 20px rgba(0,0,0,0.1);">
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <!-- Django form fields styled -->
+        {% for field in form %}
+            <div style="margin-bottom: 20px;">
+                {{ field.label_tag }}<br>
+                {{ field }}
+                {% if field.help_text %}
+                    <small style="color: #999;">{{ field.help_text }}</small>
+                {% endif %}
+                {% for error in field.errors %}
+                    <p style="color: red; margin-top: 5px;">{{ error }}</p>
+                {% endfor %}
+            </div>
+        {% endfor %}
+
+        <button type="submit" class="btn" style="width: 100%; padding: 12px; background: #4b6cb7; color: white; border-radius: 8px; font-weight: bold; cursor: pointer; transition: background 0.3s;">Create</button>
+    </form>
+
+    <div style="text-align: center; margin-top: 20px;">
+        <a href="{% url 'home' %}" class="button" style="padding: 10px 20px; background: #ff6b6b; color: white; border-radius: 8px; font-weight: bold; transition: background 0.3s;">Back to Home</a>
+    </div>
+</div>
+
+<!-- Animatsiya -->
+<style>
+    .btn:hover {
+        background: #3a559d;
+    }
+
+    .button:hover {
+        background: #ff4757;
+    }
+
+    input, select, textarea {
+        width: 100%;
+        padding: 10px 12px;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        transition: border 0.3s, box-shadow 0.3s;
+    }
+
+    input:focus, select:focus, textarea:focus {
+        border-color: #4b6cb7;
+        box-shadow: 0 0 8px rgba(75,108,183,0.3);
+        outline: none;
+    }
+</style>
+{% endblock %}

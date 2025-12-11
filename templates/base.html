@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}My Phone Shop{% endblock %}</title>
+    <style>
+        /* Global styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f2f5f7;
+            color: #333;
+        }
+
+        a {
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(90deg, #4b6cb7, #182848);
+            color: white;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        header h1 {
+            font-size: 28px;
+            letter-spacing: 1px;
+        }
+
+        nav a.button {
+            background: #ff6b6b;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-weight: bold;
+            margin-left: 10px;
+            transition: background 0.3s;
+        }
+
+        nav a.button:hover {
+            background: #ff4757;
+        }
+
+        /* Main content */
+        main {
+            padding: 40px 20px;
+            min-height: 80vh;
+        }
+
+        .card {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        .btn {
+            background: #4b6cb7;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background: #3a559d;
+        }
+
+        /* Footer */
+        footer {
+            background: #182848;
+            color: white;
+            padding: 40px 40px 20px 40px;
+            text-align: center;
+        }
+
+        footer .footer-content {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        footer .footer-section {
+            flex: 1 1 200px;
+            margin: 10px;
+        }
+
+        footer h3 {
+            margin-bottom: 10px;
+            font-size: 18px;
+            color: #ff6b6b;
+        }
+
+        footer p, footer a {
+            font-size: 14px;
+            color: #ffffff;
+        }
+
+        footer a:hover {
+            color: #ff6b6b;
+        }
+
+        footer .social-links a {
+            margin: 0 5px;
+            display: inline-block;
+            color: white;
+            font-size: 24px;
+            transition: color 0.3s;
+        }
+
+        footer .social-links a:hover {
+            color: #ff6b6b;
+        }
+
+        footer .copyright {
+            border-top: 1px solid #444;
+            padding-top: 10px;
+            font-size: 12px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                text-align: center;
+            }
+            nav a.button {
+                margin: 10px 5px 0 5px;
+            }
+            main {
+                padding: 20px 10px;
+            }
+            footer .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>My Phone Shop</h1>
+        <nav>
+            <a href="{% url 'home' %}" class="button">Home</a>
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}
+        <!-- Example card -->
+        <div class="card">
+            <h2>Sample Phone</h2>
+            <p>Price: $499</p>
+            <button class="btn">View Details</button>
+        </div>
+        {% endblock %}
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <p>Email: info@myphoneshop.com</p>
+                <p>Phone: +998 33 097 10 20</p>
+            </div>
+            <div class="footer-section">
+                <h3>Address</h3>
+                <p>123 Main Street</p>
+                <p>Tashkent, Uzbekistan</p>
+            </div>
+            <div class="footer-section">
+                <h3>Follow Me</h3>
+                <div class="social-links">
+                    <!-- Telegram icon -->
+                    <a href="https://t.me/Qudratullayeev" target="_blank" title="Telegram">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="white" viewBox="0 0 24 24">
+                            <path d="M12 0C5.371 0 0 5.371 0 12s5.371 12 12 12 12-5.371 12-12S18.629 0 12 0zm5.416 8.184l-1.72 8.108c-.129.587-.468.733-.95.456l-2.624-1.94-1.266 1.22c-.14.14-.257.257-.527.257l.188-2.653 4.828-4.356c.209-.188-.046-.293-.323-.105l-5.967 3.751-2.568-.802c-.556-.174-.566-.556.116-.82l10.043-3.875c.468-.174.875.116.722.82z"/>
+                        </svg>
+                    </a>
+                    <!-- Instagram icon -->
+                    <a href="https://instagram.com/_qudratullaev" target="_blank" title="Instagram">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="white" viewBox="0 0 24 24">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.849.07 1.366.062 2.633.344 3.608 1.319.975.975 1.257 2.242 1.319 3.608.058 1.265.069 1.645.069 4.849s-.012 3.584-.07 4.849c-.062 1.366-.344 2.633-1.319 3.608-.975.975-2.242 1.257-3.608 1.319-1.265.058-1.645.069-4.849.069s-3.584-.012-4.849-.07c-1.366-.062-2.633-.344-3.608-1.319-.975-.975-1.257-2.242-1.319-3.608C2.175 15.584 2.163 15.204 2.163 12s.012-3.584.07-4.849c.062-1.366.344-2.633 1.319-3.608.975-.975 2.242-1.257 3.608-1.319C8.416 2.175 8.796 2.163 12 2.163zm0-2.163C8.741 0 8.332.013 7.052.072 5.779.131 4.616.389 3.678 1.327 2.739 2.265 2.481 3.428 2.422 4.701.013 8.332 0 8.741 0 12s.013 3.668.072 4.948c.059 1.273.317 2.436 1.255 3.374.938.938 2.101 1.196 3.374 1.255C8.332 23.987 8.741 24 12 24s3.668-.013 4.948-.072c1.273-.059 2.436-.317 3.374-1.255.938-.938 1.196-2.101 1.255-3.374.059-1.28.072-1.689.072-4.948s-.013-3.668-.072-4.948c-.059-1.273-.317-2.436-1.255-3.374-.938-.938-2.101-1.196-3.374-1.255C15.668.013 15.259 0 12 0z"/>
+                            <path d="M12 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zm0 10.162a3.999 3.999 0 1 1 0-7.998 3.999 3.999 0 0 1 0 7.998z"/>
+                            <circle cx="18.406" cy="5.594" r="1.44"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>© 2025 My Phone Shop. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+{% block title %}Update Phone{% endblock %}
+
+{% block content %}
+<h2 style="text-align: center; color: #4b6cb7; margin-bottom: 30px;">Update Phone</h2>
+
+<div style="max-width: 500px; margin: 0 auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 8px 20px rgba(0,0,0,0.15); transition: transform 0.3s;">
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <!-- Django form fields styled -->
+        {% for field in form %}
+            <div style="margin-bottom: 20px;">
+                {{ field.label_tag }}<br>
+                {{ field }}
+                {% if field.help_text %}
+                    <small style="color: #999;">{{ field.help_text }}</small>
+                {% endif %}
+                {% for error in field.errors %}
+                    <p style="color: red; margin-top: 5px;">{{ error }}</p>
+                {% endfor %}
+            </div>
+        {% endfor %}
+
+        <button type="submit" class="btn" style="width: 100%; padding: 12px; background: #4b6cb7; color: white; border-radius: 8px; font-weight: bold; cursor: pointer; transition: background 0.3s;">Update</button>
+    </form>
+
+    <div style="display: flex; justify-content: space-between; margin-top: 20px; gap: 10px;">
+        <a href="{% url 'phone_detail' phone.pk %}" class="button back-detail" style="flex:1; padding: 12px; background: #6c757d; color: white; border-radius: 8px; font-weight: bold; text-align: center; transition: background 0.3s;">Back to Detail</a>
+        <a href="{% url 'home' %}" class="button back-home" style="flex:1; padding: 12px; background: #ff6b6b; color: white; border-radius: 8px; font-weight: bold; text-align: center; transition: background 0.3s;">Back to Home</a>
+    </div>
+</div>
+
+<!-- Animatsiya CSS -->
+<style>
+    .btn:hover {
+        background: #3a559d;
+    }
+
+    .back-detail:hover {
+        background: #5a6268;
+    }
+
+    .back-home:hover {
+        background: #ff4757;
+    }
+
+    input, select, textarea {
+        width: 100%;
+        padding: 10px 12px;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        transition: border 0.3s, box-shadow 0.3s;
+    }
+
+    input:focus, select:focus, textarea:focus {
+        border-color: #4b6cb7;
+        box-shadow: 0 0 8px rgba(75,108,183,0.3);
+        outline: none;
+    }
+
+    div:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 30px rgba(0,0,0,0.2);
+    }
+
+    @media (max-width: 768px) {
+        div {
+            margin: 30px 15px;
+        }
+    }
+</style>
+{% endblock %}
