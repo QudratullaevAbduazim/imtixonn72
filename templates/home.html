@@ -35,7 +35,7 @@
 <div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; margin-bottom: 40px;">
     {% for category in categories %}
         <div class="card" style="flex: 1 1 180px; max-width: 180px; text-align: center; transition: transform 0.3s, box-shadow 0.3s; cursor: pointer;">
-            <a href="{% url 'category_detail' pk=category.pk %}" style="display: block; padding: 20px; color: #333;">
+            <a href="{% url 'category_detail' category.pk %}" style="display: block; padding: 20px; color: #333;">
                 <h3 style="margin-bottom: 10px; color: #4b6cb7;">{{ category.name }}</h3>
             </a>
         </div>

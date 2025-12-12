@@ -3,6 +3,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.views import View
 from .forms import PhoneForm
 from .models import Phones, Category
+from django.contrib import messages
 
 class HomeView(View):
     def get(self, request):
@@ -12,13 +13,15 @@ class HomeView(View):
 
         if q:
             phones = phones.filter(Q(name__icontains=q) | Q(price__icontains=q) | Q(year__icontains=q) | Q(category__name__icontains=q)).order_by('-id')
-
+            if len(phones) == 0:
+                messages.info(request, f'Bizda {q} mahsulot mavjud emas! Bizning mahsulotlar👇 ')
+                phones = Phones.objects.all().order_by('-id')
         return render(request, 'home.html', {'categories': categories, 'phones': phones})
 
 class CategoryDetailView(View):
     def get(self, request, pk):
         category = get_object_or_404(Category, pk=pk)
-        phones = Phones.objects.filter(category=category).order_by('-id')
+        phones = Phones.objects.filter(pk=pk).order_by('-id')
         return render(request, 'category_detail.html', {'category': category, 'phones': phones})
 
 
